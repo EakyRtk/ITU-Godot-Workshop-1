@@ -1,0 +1,28 @@
+[gd_scene load_steps=4 format=3 uid="uid://dho2nvn6am5pd"]
+
+[ext_resource type="Texture2D" uid="uid://bb1gvt58bis6s" path="res://Assets/kenney_simple-space/PNG/Retina/effect_yellow.png" id="1_8hfls"]
+[ext_resource type="Texture2D" uid="uid://bmmf13534ic3u" path="res://Assets/kenney_simple-space/PNG/Retina/ship_L.png" id="1_ok3s5"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_8hfls"]
+radius = 57.5587
+
+[node name="Player" type="Node2D"]
+
+[node name="CollisionArea2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CollisionArea2D"]
+visible = false
+position = Vector2(0, 6)
+shape = SubResource("CircleShape2D_8hfls")
+debug_color = Color(0.885151, 0.321896, 0.218682, 0.42)
+
+[node name="TrailSprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, 95)
+texture = ExtResource("1_8hfls")
+
+[node name="PlayerSprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_ok3s5")
+
+[node name="PlayerSFX" type="AudioStreamPlayer2D" parent="."]
+
+[node name="ShootCooldown" type="Timer" parent="."]

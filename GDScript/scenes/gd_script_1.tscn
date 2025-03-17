@@ -1,0 +1,43 @@
+[gd_scene load_steps=8 format=3 uid="uid://biahqrx20uljg"]
+
+[ext_resource type="Script" uid="uid://c0h04spjiuepd" path="res://GDScript/scenes/gd_script_1.gd" id="1_b3xa5"]
+[ext_resource type="Script" uid="uid://dpkkal6l7ree2" path="res://GDScript/scenes/raport.gd" id="2_l5fp1"]
+[ext_resource type="Texture2D" uid="uid://jcc3vtix3axd" path="res://Assets/kenney_simple-space/PNG/Retina/meteor_detailedLarge.png" id="2_rp20l"]
+[ext_resource type="Script" uid="uid://uu7yh1vchams" path="res://GDScript/scenes/parent.gd" id="3_wq3wa"]
+[ext_resource type="Texture2D" uid="uid://ddixn7t5ve47r" path="res://Assets/kenney_simple-space/PNG/Retina/icon_exclamationLarge.png" id="4_q6mkp"]
+[ext_resource type="Texture2D" uid="uid://dr5twhb1nd1g0" path="res://Assets/kenney_simple-space/PNG/Retina/star_tiny.png" id="6_tapdw"]
+[ext_resource type="Texture2D" uid="uid://cyyw3fg761rwq" path="res://Assets/kenney_simple-space/PNG/Retina/star_medium.png" id="7_hshmo"]
+
+[node name="GDScript1" type="Node2D"]
+script = ExtResource("1_b3xa5")
+
+[node name="Child1" type="Sprite2D" parent="."]
+self_modulate = Color(0.956173, 0.331213, 0.515099, 1)
+position = Vector2(961, 496)
+texture = ExtResource("2_rp20l")
+script = ExtResource("2_l5fp1")
+
+[node name="Child2" type="Sprite2D" parent="."]
+position = Vector2(960, 540)
+texture = ExtResource("4_q6mkp")
+script = ExtResource("3_wq3wa")
+
+[node name="SubChild1" type="Sprite2D" parent="Child2"]
+position = Vector2(-79, 0)
+texture = ExtResource("6_tapdw")
+script = ExtResource("2_l5fp1")
+
+[node name="SubChild2" type="Sprite2D" parent="Child2"]
+position = Vector2(79, 0)
+texture = ExtResource("6_tapdw")
+script = ExtResource("2_l5fp1")
+
+[node name="SubChild3" type="Sprite2D" parent="Child2"]
+position = Vector2(0, 89)
+texture = ExtResource("6_tapdw")
+script = ExtResource("2_l5fp1")
+
+[node name="Child3" type="Sprite2D" parent="."]
+position = Vector2(960, 466)
+texture = ExtResource("7_hshmo")
+script = ExtResource("2_l5fp1")
