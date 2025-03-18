@@ -1,0 +1,34 @@
+[gd_scene load_steps=6 format=3 uid="uid://dci6epiwlu4u6"]
+
+[ext_resource type="Texture2D" uid="uid://dr5twhb1nd1g0" path="res://Assets/kenney_simple-space/PNG/Retina/star_tiny.png" id="1_dawig"]
+[ext_resource type="Script" uid="uid://clyyw1481s5su" path="res://SpaceGameContent/player/bullet.gd" id="1_ga8ks"]
+
+[sub_resource type="Curve" id="Curve_ga8ks"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.348315), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Gradient" id="Gradient_h86ss"]
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 0)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ovvpw"]
+radius = 17.1172
+
+[node name="Bullet" type="Area2D"]
+script = ExtResource("1_ga8ks")
+
+[node name="Line2D" type="Line2D" parent="."]
+points = PackedVector2Array(0, 0, -66, 0)
+width_curve = SubResource("Curve_ga8ks")
+gradient = SubResource("Gradient_h86ss")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_dawig")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_ovvpw")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+position = Vector2(0.500001, -0.500001)
+scale = Vector2(3.85, 3.85)
+
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_screen_exited"]

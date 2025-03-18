@@ -1,0 +1,50 @@
+[gd_scene load_steps=6 format=3 uid="uid://cyyq2mhf0h541"]
+
+[ext_resource type="PackedScene" uid="uid://dxwmrpi5qjdju" path="res://SpaceGameContent/player/player.tscn" id="1_hly68"]
+[ext_resource type="PackedScene" uid="uid://5gsd2nlobccc" path="res://SpaceGameContent/space_objects/meteor_small.tscn" id="2_bvgre"]
+[ext_resource type="PackedScene" uid="uid://dci6epiwlu4u6" path="res://SpaceGameContent/player/bullet.tscn" id="3_ea1x0"]
+
+[sub_resource type="Environment" id="Environment_bvgre"]
+background_mode = 3
+tonemap_mode = 1
+glow_enabled = true
+glow_strength = 1.15
+glow_bloom = 0.09
+glow_blend_mode = 1
+glow_hdr_threshold = 0.92
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_hly68"]
+
+[node name="GameWorld" type="Node2D"]
+metadata/_edit_lock_ = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_bvgre")
+
+[node name="Area2D" type="Area2D" parent="."]
+position = Vector2(-97, 540)
+rotation = 1.57079
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("WorldBoundaryShape2D_hly68")
+
+[node name="MeteorSmall" parent="." instance=ExtResource("2_bvgre")]
+position = Vector2(1230, 354)
+
+[node name="Player" parent="." instance=ExtResource("1_hly68")]
+position = Vector2(180, 540)
+speed = 1000.0
+shoot_cooldown = 0.135
+
+[node name="Bullet" parent="." instance=ExtResource("3_ea1x0")]
+position = Vector2(504, 442)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Control" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2

@@ -1,0 +1,81 @@
+[gd_scene load_steps=8 format=3 uid="uid://dxwmrpi5qjdju"]
+
+[ext_resource type="Script" uid="uid://cchuonjnkeo37" path="res://SpaceGameContent/player/player.gd" id="1_0ngwq"]
+[ext_resource type="Texture2D" uid="uid://bb1gvt58bis6s" path="res://Assets/kenney_simple-space/PNG/Retina/effect_yellow.png" id="2_v1llq"]
+[ext_resource type="Texture2D" uid="uid://pkppbdfc0vgy" path="res://Assets/kenney_simple-space/PNG/Retina/ship_sidesA.png" id="3_ti5e7"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_sgnij"]
+radius = 48.2701
+
+[sub_resource type="Animation" id="Animation_ti5e7"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Trail:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_v1llq"]
+resource_name = "trail"
+length = 1.6
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Trail:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.766667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(0.869392, 0.748775)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_sgnij"]
+_data = {
+&"RESET": SubResource("Animation_ti5e7"),
+&"trail": SubResource("Animation_v1llq")
+}
+
+[node name="Player" type="Node2D"]
+script = ExtResource("1_0ngwq")
+
+[node name="HitBox" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
+shape = SubResource("CircleShape2D_sgnij")
+debug_color = Color(0.965306, 0, 0.487504, 0.42)
+
+[node name="Trail" type="Sprite2D" parent="."]
+position = Vector2(-20, 0)
+rotation = 1.5708
+texture = ExtResource("2_v1llq")
+centered = false
+offset = Vector2(-64, 0)
+
+[node name="PlayerSprite" type="Sprite2D" parent="."]
+rotation = 1.5708
+texture = ExtResource("3_ti5e7")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_sgnij")
+}
+autoplay = "trail"
+
+[node name="BulletSpawnPos" type="Marker2D" parent="."]
+position = Vector2(69, 0)
+gizmo_extents = 46.0
+
+[node name="Timer" type="Timer" parent="."]
+one_shot = true
+
+[connection signal="area_entered" from="HitBox" to="." method="_on_hit_box_area_entered"]

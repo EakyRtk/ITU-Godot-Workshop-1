@@ -1,0 +1,21 @@
+[gd_scene load_steps=3 format=3 uid="uid://c1rxxn6swlmco"]
+
+[ext_resource type="Texture2D" uid="uid://ib7jlm8w22hh" path="res://Assets/kenney_ui-pack-space-expansion/PNG/Grey/Double/bar_square_gloss_large_square.png" id="1_2rhjx"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_2rhjx"]
+
+[node name="HealthBrogressBar" type="TextureProgressBar"]
+material = SubResource("CanvasItemMaterial_2rhjx")
+offset_right = 115.0
+offset_bottom = 27.0
+max_value = 4.0
+value = 3.0
+nine_patch_stretch = true
+stretch_margin_left = 10
+stretch_margin_top = 10
+stretch_margin_right = 10
+stretch_margin_bottom = 10
+texture_under = ExtResource("1_2rhjx")
+texture_progress = ExtResource("1_2rhjx")
+tint_under = Color(0.419813, 0.419813, 0.419813, 0.564706)
+tint_progress = Color(0.769952, 0.190576, 0.232823, 1)

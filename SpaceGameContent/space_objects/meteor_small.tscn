@@ -1,0 +1,52 @@
+[gd_scene load_steps=7 format=3 uid="uid://5gsd2nlobccc"]
+
+[ext_resource type="Script" uid="uid://1mwl2e55t68y" path="res://SpaceGameContent/space_objects/meteor_small.gd" id="1_2ji04"]
+[ext_resource type="Texture2D" uid="uid://dsg214rbkwayl" path="res://Assets/kenney_simple-space/PNG/Retina/meteor_squareDetailedSmall.png" id="1_dswsl"]
+[ext_resource type="PackedScene" uid="uid://c1rxxn6swlmco" path="res://SpaceGameContent/health_brogress_bar.tscn" id="3_xk12p"]
+
+[sub_resource type="Curve" id="Curve_xk12p"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.382023), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Gradient" id="Gradient_4x8yl"]
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 0)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_2ji04"]
+radius = 31.0644
+
+[node name="MeteorSmall" type="Area2D"]
+script = ExtResource("1_2ji04")
+
+[node name="Line2D" type="Line2D" parent="."]
+points = PackedVector2Array(0, 0, 141, 0)
+width = 45.47
+width_curve = SubResource("Curve_xk12p")
+gradient = SubResource("Gradient_4x8yl")
+end_cap_mode = 2
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_dswsl")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_2ji04")
+debug_color = Color(0.913335, 0.233729, 0.452148, 0.42)
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+position = Vector2(-1, 2.5)
+scale = Vector2(9.3, 9.45)
+
+[node name="HealthBrogressBar" parent="." instance=ExtResource("3_xk12p")]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -50.0
+offset_top = -63.0
+offset_right = 51.0
+offset_bottom = -38.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_screen_exited"]
