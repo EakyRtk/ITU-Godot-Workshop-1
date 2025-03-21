@@ -16,6 +16,10 @@ run/main_scene="uid://crua40alcin12"
 config/features=PackedStringArray("4.4", "Forward Plus")
 config/icon="uid://7y3a4kv1kkoi"
 
+[autoload]
+
+Music="*res://SpaceGameContent/autoload-music.tscn"
+
 [display]
 
 window/size/viewport_width=1920
