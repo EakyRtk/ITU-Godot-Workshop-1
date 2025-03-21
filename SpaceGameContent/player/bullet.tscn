@@ -8,7 +8,7 @@ _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.348315), 0.0, 0.0, 0, 0]
 point_count = 2
 
 [sub_resource type="Gradient" id="Gradient_h86ss"]
-colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 0)
+colors = PackedColorArray(1, 0.556863, 1, 1, 0, 0, 0, 0)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ovvpw"]
 radius = 17.1172
@@ -22,6 +22,7 @@ width_curve = SubResource("Curve_ga8ks")
 gradient = SubResource("Gradient_h86ss")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+self_modulate = Color(2.11775e-06, 0.992856, 0.827033, 1)
 texture = ExtResource("1_dawig")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

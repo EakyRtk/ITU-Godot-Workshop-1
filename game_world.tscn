@@ -1,8 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://cyyq2mhf0h541"]
+[gd_scene load_steps=9 format=3 uid="uid://cyyq2mhf0h541"]
 
 [ext_resource type="PackedScene" uid="uid://dxwmrpi5qjdju" path="res://SpaceGameContent/player/player.tscn" id="1_hly68"]
 [ext_resource type="PackedScene" uid="uid://5gsd2nlobccc" path="res://SpaceGameContent/space_objects/meteor_small.tscn" id="2_bvgre"]
-[ext_resource type="PackedScene" uid="uid://dci6epiwlu4u6" path="res://SpaceGameContent/player/bullet.tscn" id="3_ea1x0"]
+[ext_resource type="Theme" uid="uid://cgyhrkis8x623" path="res://SpaceGameContent/themes/theme1.tres" id="3_ea1x0"]
+[ext_resource type="Script" uid="uid://yfrx57rlgcux" path="res://SpaceGameContent/other_scripts.gd" id="4_e08lw"]
+[ext_resource type="Shader" uid="uid://c3ui3cor2tog7" path="res://space.gdshader" id="5_e3xe6"]
 
 [sub_resource type="Environment" id="Environment_bvgre"]
 background_mode = 3
@@ -14,6 +16,14 @@ glow_blend_mode = 1
 glow_hdr_threshold = 0.92
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_hly68"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_mcbma"]
+shader = ExtResource("5_e3xe6")
+shader_parameter/brightness = 2.0
+shader_parameter/amount = 0.75
+shader_parameter/randomness = 5.785
+shader_parameter/background_amount = 0.0
+shader_parameter/flashing = 0.001
 
 [node name="GameWorld" type="Node2D"]
 metadata/_edit_lock_ = true
@@ -36,10 +46,50 @@ position = Vector2(180, 540)
 speed = 1000.0
 shoot_cooldown = 0.135
 
-[node name="Bullet" parent="." instance=ExtResource("3_ea1x0")]
-position = Vector2(504, 442)
-
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="PauseMenu" type="Control" parent="CanvasLayer"]
+process_mode = 3
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("3_ea1x0")
+script = ExtResource("4_e08lw")
+metadata/_edit_lock_ = true
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer/PauseMenu"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.163479, 0.0670936, 0.189446, 0.603922)
+metadata/_edit_lock_ = true
+
+[node name="CenterContainer" type="CenterContainer" parent="CanvasLayer/PauseMenu"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/PauseMenu/CenterContainer"]
+layout_mode = 2
+theme_override_constants/separation = 170
+
+[node name="ResumeButton" type="Button" parent="CanvasLayer/PauseMenu/CenterContainer/VBoxContainer"]
+layout_mode = 2
+text = "RESUME"
+
+[node name="ExitGameButton" type="Button" parent="CanvasLayer/PauseMenu/CenterContainer/VBoxContainer"]
+layout_mode = 2
+text = "EXIT GAME"
 
 [node name="Control" type="Control" parent="CanvasLayer"]
 layout_mode = 3
@@ -48,3 +98,17 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer/Control"]
+material = SubResource("ShaderMaterial_mcbma")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[connection signal="pressed" from="CanvasLayer/PauseMenu/CenterContainer/VBoxContainer/ResumeButton" to="CanvasLayer/PauseMenu" method="_on_resume_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/PauseMenu/CenterContainer/VBoxContainer/ExitGameButton" to="CanvasLayer/PauseMenu" method="_on_exit_game_button_pressed"]
+
+[editable path="Player"]
