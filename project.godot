@@ -13,7 +13,7 @@ config_version=5
 config/name="GodotWorkshop-1"
 config/tags=PackedStringArray("workshop")
 config/features=PackedStringArray("4.4", "Forward Plus")
-config/icon="uid://bku0gq00j6hh0"
+config/icon="uid://7y3a4kv1kkoi"
 
 [display]
 
