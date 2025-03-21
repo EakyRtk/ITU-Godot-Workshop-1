@@ -1,8 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://5gsd2nlobccc"]
+[gd_scene load_steps=8 format=3 uid="uid://5gsd2nlobccc"]
 
 [ext_resource type="Script" uid="uid://1mwl2e55t68y" path="res://SpaceGameContent/space_objects/meteor_small.gd" id="1_2ji04"]
 [ext_resource type="Texture2D" uid="uid://dsg214rbkwayl" path="res://Assets/kenney_simple-space/PNG/Retina/meteor_squareDetailedSmall.png" id="1_dswsl"]
 [ext_resource type="PackedScene" uid="uid://c1rxxn6swlmco" path="res://SpaceGameContent/health_brogress_bar.tscn" id="3_xk12p"]
+[ext_resource type="AudioStream" uid="uid://bhytx2onikrh4" path="res://Assets/kenney_sci-fi-sounds/Audio/explosionCrunch_002.ogg" id="4_4x8yl"]
 
 [sub_resource type="Curve" id="Curve_xk12p"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.382023), 0.0, 0.0, 0, 0]
@@ -47,6 +48,10 @@ offset_right = 51.0
 offset_bottom = -38.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="Hit" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_4x8yl")
+bus = &"SFX"
 
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]
 [connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_screen_exited"]

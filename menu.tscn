@@ -1,7 +1,15 @@
-[gd_scene load_steps=3 format=3 uid="uid://crua40alcin12"]
+[gd_scene load_steps=5 format=3 uid="uid://crua40alcin12"]
 
 [ext_resource type="Theme" uid="uid://cgyhrkis8x623" path="res://SpaceGameContent/themes/theme1.tres" id="1_ouk20"]
 [ext_resource type="Script" uid="uid://rk0p6bthow88" path="res://menu.gd" id="2_ouk20"]
+[ext_resource type="Shader" uid="uid://fsf5hknb24qm" path="res://SpaceGameContent/crt.gdshader" id="3_mae5d"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_4hy44"]
+shader = ExtResource("3_mae5d")
+shader_parameter/wiggle = 0.03
+shader_parameter/wiggle_speed = 25.0
+shader_parameter/smear = 1.0
+shader_parameter/blur_samples = 15
 
 [node name="Menu" type="Control"]
 layout_mode = 3
@@ -14,6 +22,7 @@ theme = ExtResource("1_ouk20")
 script = ExtResource("2_ouk20")
 
 [node name="ColorRect" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_4hy44")
 layout_mode = 2
 offset_right = 1920.0
 offset_bottom = 1080.0

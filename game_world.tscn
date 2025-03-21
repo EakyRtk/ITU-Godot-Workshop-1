@@ -4,7 +4,16 @@
 [ext_resource type="PackedScene" uid="uid://5gsd2nlobccc" path="res://SpaceGameContent/space_objects/meteor_small.tscn" id="2_bvgre"]
 [ext_resource type="Theme" uid="uid://cgyhrkis8x623" path="res://SpaceGameContent/themes/theme1.tres" id="3_ea1x0"]
 [ext_resource type="Script" uid="uid://yfrx57rlgcux" path="res://SpaceGameContent/other_scripts.gd" id="4_e08lw"]
-[ext_resource type="Shader" uid="uid://c3ui3cor2tog7" path="res://space.gdshader" id="5_e3xe6"]
+[ext_resource type="Shader" uid="uid://fsf5hknb24qm" path="res://SpaceGameContent/crt.gdshader" id="5_e3xe6"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_hly68"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_mcbma"]
+shader = ExtResource("5_e3xe6")
+shader_parameter/wiggle = 0.03
+shader_parameter/wiggle_speed = 25.0
+shader_parameter/smear = 0.596
+shader_parameter/blur_samples = 3
 
 [sub_resource type="Environment" id="Environment_bvgre"]
 background_mode = 3
@@ -15,21 +24,8 @@ glow_bloom = 0.09
 glow_blend_mode = 1
 glow_hdr_threshold = 0.92
 
-[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_hly68"]
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_mcbma"]
-shader = ExtResource("5_e3xe6")
-shader_parameter/brightness = 2.0
-shader_parameter/amount = 0.75
-shader_parameter/randomness = 5.785
-shader_parameter/background_amount = 0.0
-shader_parameter/flashing = 0.001
-
 [node name="GameWorld" type="Node2D"]
 metadata/_edit_lock_ = true
-
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = SubResource("Environment_bvgre")
 
 [node name="Area2D" type="Area2D" parent="."]
 position = Vector2(-97, 540)
@@ -107,6 +103,9 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_bvgre")
 
 [connection signal="pressed" from="CanvasLayer/PauseMenu/CenterContainer/VBoxContainer/ResumeButton" to="CanvasLayer/PauseMenu" method="_on_resume_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/PauseMenu/CenterContainer/VBoxContainer/ExitGameButton" to="CanvasLayer/PauseMenu" method="_on_exit_game_button_pressed"]
